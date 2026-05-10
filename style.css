@@ -1,0 +1,113 @@
+/* 基本設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* --- ヘッダー（常に表示） --- */
+.main-header {
+    background-color: #0076BE; /* デザインに近い青色 */
+    color: #fff;
+    padding: 15px 5%;
+    position: sticky; /* スクロールしても上部に張り付く */
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between; /* 両端に配置 */
+    align-items: baseline;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.download-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* --- メインコンテンツ --- */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 5%;
+}
+
+.sub-title {
+    color: #0076BE;
+    font-size: 1.5rem;
+    display: inline-block;
+    border-bottom: 2px solid #0076BE; /* 下線 */
+    margin-bottom: 15px;
+}
+
+.body-text {
+    margin-bottom: 30px;
+    word-break: break-all; /* 長いテキストの改行対策 */
+}
+
+/* --- イラスト/動画エリア（レスポンシブ） --- */
+.media-placeholder {
+    background-color: #eee;
+    width: 100%;
+    max-width: 800px; /* PCでの最大幅 */
+    aspect-ratio: 16 / 9; /* 常に一定の比率を維持 */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+/* --- レスポンシブ調整（スマホ向け） --- */
+@media (max-width: 600px) {
+    .main-title {
+        font-size: 1.5rem;
+    }
+    .header-inner {
+        flex-direction: column; /* スマホでは縦並びにする場合 */
+        align-items: flex-start;
+    }
+    .download-link {
+        margin-top: 5px;
+    }
+}
+
+/* 動画の外枠コンテナ */
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;   /* 左右中央寄せ */
+    aspect-ratio: 16 / 9;
+
+    /* iframeの後ろ（下側）にアキを作る */
+    margin-bottom: 30px; /* ここでアキの広さを調整してください */
+}
+
+/* 中のiframeをコンテナいっぱいに広げる */
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.pdf-viewer {
+    width: 100%;
+    max-width: 900px;
+    height: 80vh; /* 画面の高さの8割にする設定 */
+    margin: 0 auto;
+}
