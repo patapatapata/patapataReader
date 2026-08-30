@@ -111,3 +111,18 @@ body {
     height: 80vh; /* 画面の高さの8割にする設定 */
     margin: 0 auto;
 }
+
+.changelog-notice {
+    margin: 0px 0 20px;
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+.changelog-notice a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.changelog-notice a:hover {
+    text-decoration: underline;
+}
