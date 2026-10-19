@@ -1,0 +1,177 @@
+/* ===== スクリーンショットページ専用CSS（style.css の後に読み込む） ===== */
+
+/* ヘッダー右側のナビ */
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+}
+.header-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.header-nav a:hover,
+.header-nav a[aria-current="page"] {
+    text-decoration: underline;
+}
+
+/* 前書き */
+.shots-lead {
+    margin-bottom: 10px;
+}
+
+/* ギャラリー（画面幅に応じて自動で列数が変わる） */
+.shot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px 24px;
+    margin-bottom: 50px;
+}
+
+/* 横長に目立たせたい1枚用（class="shot is-wide" を付ける） */
+.shot.is-wide {
+    grid-column: 1 / -1;
+}
+
+.shot {
+    margin: 0;
+}
+
+.shot-frame {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid #cfd8df;
+    border-radius: 4px;
+    background: #f3f6f8;
+    cursor: zoom-in;
+    overflow: hidden;
+    line-height: 0;
+    transition: border-color .15s, box-shadow .15s;
+}
+.shot-frame:hover {
+    border-color: #0076BE;
+    box-shadow: 0 2px 10px rgba(0, 118, 190, .18);
+}
+.shot-frame:focus-visible {
+    outline: 3px solid #0076BE;
+    outline-offset: 2px;
+}
+
+.shot-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* 画像がまだ無い時の仮表示（JSが自動で差し込む） */
+.shot-missing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 10;
+    color: #6b7a86;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
+    padding: 1em;
+    word-break: break-all;
+}
+
+.shot figcaption {
+    margin-top: 8px;
+    font-size: 0.92rem;
+    color: #444;
+}
+.shot figcaption strong {
+    display: block;
+    color: #0076BE;
+    font-size: 1rem;
+}
+
+/* --- 拡大表示（ライトボックス） --- */
+.lightbox {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 96vw;
+    max-height: 96vh;
+    margin: auto;
+    overflow: visible;
+}
+.lightbox::backdrop {
+    background: rgba(10, 25, 35, .82);
+}
+.lightbox-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.lightbox img {
+    max-width: 96vw;
+    max-height: 82vh;
+    background: #fff;
+    border-radius: 3px;
+}
+.lightbox-caption {
+    color: #fff;
+    font-size: 0.95rem;
+    text-align: center;
+    max-width: 90vw;
+}
+.lightbox-bar {
+    display: flex;
+    gap: 10px;
+}
+.lightbox-bar button {
+    font: inherit;
+    font-size: 0.9rem;
+    color: #fff;
+    background: #0076BE;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    padding: 6px 16px;
+    cursor: pointer;
+}
+.lightbox-bar button:hover {
+    background: #005f99;
+}
+.lightbox-bar button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
+/* ページ下部 */
+.shots-footer {
+    border-top: 1px solid #cfd8df;
+    padding-top: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+.shots-footer a {
+    color: #0066cc;
+}
+
+@media (max-width: 600px) {
+    .header-nav {
+        margin-top: 5px;
+    }
+    .shot-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* UIアイコン・ボタン画像用インラインスタイル */
+.shot figcaption .ui-icon,
+.lightbox-caption .ui-icon {
+    display: inline-block;
+    height: 1.2em;           /* 周りの文字の大きさに高さを合わせる */
+    width: auto;             /* 横幅は比率を維持して自動調整 */
+    vertical-align: -0.2em;  /* 文字のベースラインに対する微調整 */
+    margin: 0 0.15em;
+    border-radius: 2px;      /* 角を少し丸くする場合（不要なら削除可） */
+    border: 1px solid #ccc;  /* 枠線をつけたい場合（不要なら削除可） */
+    background: #fff;
+}
