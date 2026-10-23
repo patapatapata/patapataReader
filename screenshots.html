@@ -261,18 +261,20 @@
         </div>
     </dialog>
 
-    <script>
+<script>
     (function () {
+        // すべての .shot を取得
         var shots = Array.prototype.slice.call(document.querySelectorAll('.shot'));
         var dlg = document.getElementById('lightbox');
         var lbImg = document.getElementById('lightbox-img');
         var lbCap = document.getElementById('lightbox-caption');
         var current = -1;
 
-        // 画像が見つからない場合は「画像準備中」を表示
+        // 画像が見つからない場合の処理 ＆ クリックイベントの設定
         shots.forEach(function (shot) {
             var img = shot.querySelector('img');
-            var frame = shot.querySelector('.shot-frame');
+            var frame = shot.querySelector('.shot-frame'); // ボタン（通常ショットのみ存在）
+            
             function showMissing() {
                 shot.classList.add('is-missing');
                 var box = document.createElement('span');
@@ -280,17 +282,25 @@
                 box.textContent = '画像準備中：' + img.getAttribute('src');
                 img.replaceWith(box);
             }
-            img.addEventListener('error', showMissing);
-            if (img.complete && img.naturalWidth === 0) showMissing();
+            if (img) {
+                img.addEventListener('error', showMissing);
+                if (img.complete && img.naturalWidth === 0) showMissing();
+            }
 
-            frame.addEventListener('click', function () {
-                if (shot.classList.contains('is-missing')) return;
-                open(shots.indexOf(shot));
-            });
+            // ★ .shot-frame（ボタン）が存在する場合のみ、クリック拡大を有効にする
+            if (frame) {
+                frame.addEventListener('click', function () {
+                    if (shot.classList.contains('is-missing')) return;
+                    open(shots.indexOf(shot));
+                });
+            }
         });
 
+        // 拡大表示できる（is-plainではなく、かつ missing ではない）ショットのリスト
         function visibleShots() {
-            return shots.filter(function (s) { return !s.classList.contains('is-missing'); });
+            return shots.filter(function (s) { 
+                return !s.classList.contains('is-missing') && !s.classList.contains('is-plain'); 
+            });
         }
 
         function open(i) {
@@ -318,7 +328,7 @@
         // 画像の外側（背景）クリックで閉じる
         dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
 
-        // キーボード操作：← → で前後、Esc で閉じる（Escはdialog標準）
+        // キーボード操作：← → で前後、Esc で閉じる
         document.addEventListener('keydown', function (e) {
             if (!dlg.open) return;
             if (e.key === 'ArrowLeft') step(-1);
