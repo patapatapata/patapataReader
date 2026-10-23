@@ -175,3 +175,22 @@
     border: 1px solid #ccc;  /* 枠線をつけたい場合（不要なら削除可） */
     background: #fff;
 }
+
+/* 横長で、かつ枠や背景を無くしたい場合 */
+.shot.is-wide.is-plain .shot-plain-frame {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: default;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.shot.is-wide.is-plain .shot-plain-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
